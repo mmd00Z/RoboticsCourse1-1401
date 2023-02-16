@@ -6,12 +6,17 @@ void setup() {
   pinMode(LED_PIN, OUTPUT);
 }
 
-int state = 0;
 
 void loop() {
-  if(Serial.available()) {
-    state = Serial.parseInt();
-  }
+  String state;
 
-  digitalWrite(LED_PIN, state);
+  if (Serial.available()) {
+    state = Serial.readString();
+  }
+  
+  if (state == "on") {
+    digitalWrite(LED_PIN, 1);
+  } else if (state == "off") {
+    digitalWrite(LED_PIN, 0);
+  }
 }
